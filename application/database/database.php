@@ -63,7 +63,6 @@ function selectOne($table, $params = [])
             $i++;
         }
     }
-    $sql .= " LIMIT 1";
 
     $query = $pdo->prepare($sql);
     $query->execute();
@@ -76,5 +75,3 @@ $params = [
     'is_admin' => 1,
     'username' => 'Dok'
 ];
-
-var_dump(selectAll('users', $params));
