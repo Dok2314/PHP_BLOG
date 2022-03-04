@@ -95,6 +95,8 @@ function insert($table, $params)
     $query = $pdo->prepare($sql);
     $query->execute($params);
     dbCheckError($query);
+
+    return $pdo->lastInsertId();
 }
 
 // Обновляю И Удаляю запись с БД
@@ -132,10 +134,3 @@ function delete($table, $id)
     $query->execute();
     dbCheckError($query);
 }
-
-$params = [
-  'is_admin' => 0,
-  'password' => '777777'
-];
-
-delete('users',16);
