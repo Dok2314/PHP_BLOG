@@ -379,4 +379,18 @@ header ul li ul li a{
     transition: all .3s;
 }
 
+/*
+    FORM VALIDATION ERROR
+*/
 
+form div.err p{
+    color: red;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+form div.success p{
+    color: green;
+    font-style: italic;
+    font-size: 1.5rem;
+}

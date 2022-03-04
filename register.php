@@ -29,15 +29,25 @@
 <div class="container reg_form">
     <form class="row justify-content-center" method="post" action="register.php">
         <h2>Форма Регистрации</h2>
+        <?php if($errorMessage){ ?>
+        <div class="mb-3 col-12 col-md-4 err">
+            <p><?=$errorMessage;?></p>
+        </div>
+        <?php } ?>
+        <?php if($success){ ?>
+            <div class="mb-3 col-12 col-md-4 success">
+                <p><?=$success;?></p>
+            </div>
+        <?php } ?>
+        <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Ваш Логин</label>
-            <input type="text" name="login" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+            <input type="text" name="login" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" value="<?=$login;?>">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?=$email;?>">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
