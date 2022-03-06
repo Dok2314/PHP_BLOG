@@ -3,9 +3,21 @@
 include 'application/database/database.php';
 
 $errorMessage = '';
-$success = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+function loginUser($user)
+{
+    $_SESSION['login']  = $user['id'];
+    $_SESSION['login']  = $user['username'];
+    $_SESSION['admin']  = $user['is_admin'];
+    if($_SESSION['admin']){
+        header("Location: " . BASE_URL . 'admin/admin.php');
+    }else{
+        header("Location: " . BASE_URL);
+    }
+}
+
+//Код для формы регистрации
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
     $admin =    0;
     $login =    trim($_POST['login']);
     $email =    trim($_POST['email']);
@@ -19,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }elseif($passF !== $passS){
         $errorMessage = 'Пароли не совпадают!';
     }else{
-        $existence = selectOne('users',['email' => $email]);
+        $existence = selectOne('users', ['email' => $email]);
         if($existence['email'] === $email){
             $errorMessage = 'Пользователь с такой почтой уже существует!';
         }else{
@@ -32,17 +44,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             ];
             $id = insert('users', $post);
             $user = selectOne('users', ['id' => $id]);
-            $_SESSION['id']     = $user['id'];
-            $_SESSION['login']  = $user['username'];
-            $_SESSION['admin']  = $user['is_admin'];
-            if($_SESSION['admin']){
-                header("Location: " . BASE_URL . 'admin/admin.php');
-            }else{
-                header("Location: " . BASE_URL);
-            }
+            loginUser($user);
         }
     }
 }else{
     $login = '';
+    $email = '';
+}
+
+//Код для формы авторизации
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
+
+    $email    =  trim($_POST['email']);
+    $password =  trim($_POST['password']);
+
+    if($email === '' || $password === '') {
+        $errorMessage = 'Не все поля заполнены!';
+    }else{
+        $existence = selectOne('users', ['email' => $email]);
+        if($existence && password_verify($password, $existence['password'])){
+            loginUser($existence);
+        }else{
+            $errorMessage = 'Почта либо пароль введены не верно!';
+        }
+    }
+}else{
     $email = '';
 }

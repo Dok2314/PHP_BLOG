@@ -34,11 +34,6 @@
             <p><?=$errorMessage;?></p>
         </div>
         <?php } ?>
-        <?php if($success){ ?>
-            <div class="mb-3 col-12 col-md-4 success">
-                <p><?=$success;?></p>
-            </div>
-        <?php } ?>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Ваш Логин</label>
@@ -62,7 +57,7 @@
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
         <button type="submit" class="btn btn-secondary" name="button-reg">Регистрация</button>
-            <a href="aut.html">Войти</a>
+            <a href="<?php echo BASE_URL . 'login.php'; ?>">Войти</a>
         </div>
     </form>
 </div>
