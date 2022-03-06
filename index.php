@@ -1,4 +1,7 @@
-<?php include('path.php'); ?>
+<?php
+      include('path.php');
+      include ('application/database/database.php')
+?>
 <!doctype html>
 <html lang="en">
 <head>

@@ -9,8 +9,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $admin =    0;
     $login =    trim($_POST['login']);
     $email =    trim($_POST['email']);
-    $passF = trim($_POST['pass-first']);
-    $passS = trim($_POST['pass-second']);
+    $passF =    trim($_POST['pass-first']);
+    $passS =    trim($_POST['pass-second']);
 
     if($login === '' || $email === '' || $passF === ''){
         $errorMessage = 'Не все поля заполнены!';
@@ -31,7 +31,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 'password' => $pass
             ];
             $id = insert('users', $post);
-            $success = "Пользователь " . "<strong>" . $login ."</strong>" . " успешно зарегистрирован!";
+            $user = selectOne('users', ['id' => $id]);
+            $_SESSION['id']     = $user['id'];
+            $_SESSION['login']  = $user['username'];
+            $_SESSION['admin']  = $user['is_admin'];
+            if($_SESSION['admin']){
+                header("Location: " . BASE_URL . 'admin/admin.php');
+            }else{
+                header("Location: " . BASE_URL);
+            }
         }
     }
 }else{

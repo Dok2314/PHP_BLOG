@@ -3,6 +3,8 @@ ini_set('error_reporting', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
+
 require_once 'connect.php';
 
 // Проверяем на ошибки выполнения запроса к БД
