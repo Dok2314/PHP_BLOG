@@ -13,15 +13,16 @@
                     <li><a href="">Услуги</a></li>
                     <li>
                         <?php if($_SESSION['id']): ?>
+
                             <a href="">
                                 <i class="far fa-user"></i>
                                 <?=$_SESSION['login'];?>
                             </a>
                             <ul class="dropdown-content dropdown">
                                 <?php if($_SESSION['admin']): ?>
-                                <li><a href="#">Админ панель</a></li>
+                                    <li><a href="#">Админ панель</a></li>
                                 <?php endif; ?>
-                                <li><a href="">Выход</a></li>
+                                <li><a href="<?php echo BASE_URL . 'logout.php'; ?>">Выход</a></li>
                             </ul>
                         <?php else: ?>
                             <a href="<?php echo BASE_URL . 'login.php'; ?>">

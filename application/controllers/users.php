@@ -6,7 +6,7 @@ $errorMessage = '';
 
 function loginUser($user)
 {
-    $_SESSION['login']  = $user['id'];
+    $_SESSION['id']  =    $user['id'];
     $_SESSION['login']  = $user['username'];
     $_SESSION['admin']  = $user['is_admin'];
     if($_SESSION['admin']){
