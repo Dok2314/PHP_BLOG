@@ -3,6 +3,10 @@
 include "../../application/database/database.php";
 include "../../path.php";
 
+if(!$_SESSION){
+    header("Location: " . BASE_URL . "login.php");
+}
+
 $errorMessage  = '';
 $id            = '';
 $title         = '';
@@ -16,6 +20,39 @@ $postsAdmin         = selectAllFromPostsWithUsers('posts', 'users');
 
 //Создание поста
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
+
+    if(!empty($_FILES['img']['name'])){
+        $imgName     = time() . "_" . $_FILES['img']['name'];
+        $fileTmpName = $_FILES['img']['tmp_name'];
+        $fileType    = $_FILES['img']['type'];
+        $fileSize    = $_FILES['img']['size'];
+        $destination = ROOT_PATH . "/assets/images/posts/" . $imgName;
+        $image_info  = getimagesize($_FILES["img"]["tmp_name"]);
+        $width = $image_info[0];
+        $height = $image_info[1];
+        //Height and Width
+
+        if(strpos($fileType, 'image') === false){
+            die('Можно загружать только изображение!');
+        }elseif($fileSize > 50000){
+            die('Слишком большой файл!');
+        }elseif($width > 1000){
+            die('Слишком большая ширина');
+        }elseif ($height > 1000){
+            die('Слишком большая высота');
+        }else{
+            $result = move_uploaded_file($fileTmpName, $destination);
+
+            if($result){
+                $_POST['img'] = $imgName;
+            }else{
+                $errorMessage = 'Ошибка загрузки файла!';
+            }
+        }
+
+    }else{
+        $errorMessage = 'Ошибка получения картинки!';
+    }
 
     $title        =    trim($_POST['title']);
     $content      =    trim($_POST['content']);

@@ -44,8 +44,7 @@
                 <h2>Добавление Записи</h2>
             </div>
             <div class="row add-post">
-                <form action="created.php" method="post">
-                    <form>
+                <form action="created.php" method="post" enctype="multipart/form-data">
                         <?php if($errorMessage){ ?>
                             <div class="mb-3 col-12 col-md-4 err">
                                 <p><?=$errorMessage;?></p>
