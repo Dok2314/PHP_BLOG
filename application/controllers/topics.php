@@ -9,7 +9,7 @@ $name         = '';
 $description  = '';
 $allTopics    = selectAll('topics');
 
-//Код для формы регистрации
+//Создание категории
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-create'])){
 
     $name        =    trim($_POST['name']);
