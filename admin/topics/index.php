@@ -1,6 +1,7 @@
 <?php
-session_start();
-include('../../path.php');
+    session_start();
+    include('../../path.php');
+    include "../../application/controllers/topics.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,24 +32,14 @@ include('../../path.php');
 
 <div class="container">
     <div class="row">
-        <div class="sidebar col-3">
-            <ul>
-                <li>
-                    <a href="">Пользователи</a>
-                </li>
-                <li>
-                    <a href="">Записи</a>
-                </li>
-                <li>
-                    <a href="">Категории</a>
-                </li>
-            </ul>
-        </div>
+
+        <?php include "../../application/include/admin_sidebar.php"; ?>
+
         <div class="posts col-9">
             <div class="button row">
-                <a href="../../admin/posts/created.php" class="col-2 btn btn-success">Создать</a>
+                <a href="<?php echo BASE_URL . "admin/topics/created.php";?>" class="col-2 btn btn-success">Создать</a>
                 <span class="col-1"></span>
-                <a href="" class="col-3 btn btn-warning">Управлять</a>
+                <a href="<?php echo BASE_URL . "admin/topics/index.php";?>" class="col-3 btn btn-warning">Управлять</a>
             </div>
             <div class="row title-table">
                 <h2>Управление Категориями</h2>
@@ -56,12 +47,14 @@ include('../../path.php');
                 <div class="col-5">Название</div>
                 <div class="col-4">Управление</div>
             </div>
+            <?php foreach ($allTopics as $topic) { ?>
             <div class="row post">
-                <div class="id col-1">1</div>
-                <div class="title col-5">Путешествие</div>
-                <div class="red col-2"><a href="">Edit</a></div>
-                <div class="del col-2"><a href="">Delete</a></div>
+                <div class="id col-1"><?php echo $topic['id']; ?></div>
+                <div class="title col-5"><?php echo $topic['name']; ?></div>
+                <div class="red col-2"><a href="edit.php?id=<?php echo $topic['id']; ?>">Edit</a></div>
+                <div class="del col-2"><a href="edit.php?delete_id=<?php echo $topic['id']; ?>">Delete</a></div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>

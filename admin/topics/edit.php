@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
     include('../../path.php');
     include('../../application/controllers/topics.php');
 ?>
@@ -42,26 +42,27 @@ session_start();
                 <a href="<?php echo BASE_URL . "admin/topics/index.php";?>" class="col-3 btn btn-warning">Управлять</a>
             </div>
             <div class="row title-table">
-                <h2>Создать Категорию</h2>
+                <h2>Обновление Категории <span style="color: green; font-weight: bolder"><?php echo $name; ?></span></h2>
             </div>
             <div class="row add-post">
-                <form action="created.php" method="post">
-                        <?php if($errorMessage){ ?>
-                            <div class="mb-3 col-12 col-md-4 err">
-                                <p><?=$errorMessage;?></p>
-                            </div>
-                        <?php } ?>
-                        <div class="mb-3">
-                            <label for="title">Название Категории</label>
-                            <input type="name" class="form-control" name="name" placeholder="Название" id="title" aria-label="Название категории" value="<?php echo $name; ?>">
+                <form action="edit.php" method="post">
+                    <?php if($errorMessage){ ?>
+                        <div class="mb-3 col-12 col-md-4 err">
+                            <p><?=$errorMessage;?></p>
                         </div>
-                        <div class="mb-3">
-                            <label for="content">Описание Категории</label>
-                            <textarea class="form-control" name="description" placeholder="Описание..." id="content" style="height: 100px"><?php echo $description; ?></textarea>
-                        </div>
-                        <br>
-                        <button type="submit" name="topic-create" class="btn btn-primary">Создать Категорию</button>
-                    </form>
+                    <?php } ?>
+                    <input type="hidden" name="id" value="<?=$id;?>">
+                    <div class="mb-3">
+                        <label for="title">Название Категории</label>
+                        <input type="name" class="form-control" name="name" placeholder="Название" id="title" aria-label="Название категории" value="<?php echo $name; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content">Описание Категории</label>
+                        <textarea class="form-control" name="description" placeholder="Описание..." id="content" style="height: 100px"><?php echo $description; ?></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" name="topic-edit" class="btn btn-primary">Обновить Категорию</button>
+                </form>
                 </form>
             </div>
         </div>
