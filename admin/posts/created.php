@@ -1,9 +1,9 @@
 <?php
-session_start();
-include('../../path.php');
+    include('../../path.php');
+    include('../../application/controllers/posts.php');
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -46,26 +46,31 @@ include('../../path.php');
             <div class="row add-post">
                 <form action="created.php" method="post">
                     <form>
+                        <?php if($errorMessage){ ?>
+                            <div class="mb-3 col-12 col-md-4 err">
+                                <p><?=$errorMessage;?></p>
+                            </div>
+                        <?php } ?>
                         <div class="mb-3">
                             <label for="title">Название Статьи</label>
-                            <input type="email" class="form-control" placeholder="Название" id="title" aria-label="Название Сатьи">
+                            <input type="text" name="title" class="form-control" placeholder="Название" id="title" aria-label="Название Сатьи">
                         </div>
                         <div class="mb-3">
                             <label for="editor">Содержимое Записи</label>
-                            <textarea class="form-control" placeholder="Сатьтя..." id="editor" style="height: 100px"></textarea>
+                            <textarea class="form-control" name="content" placeholder="Сатьтя..." id="editor" style="height: 100px"></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="upload">
+                            <input type="file" class="form-control" name="img" id="upload">
                             <label for="upload" class="input-group-text">Загрузить</label>
                         </div>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select" aria-label="Default select example" name="topic">
+                            <option selected>Выберите категорию</option>
+                            <?php foreach ($allTopics as $topic) { ?>
+                                <option value="<?php echo $topic['id'] ;?>"><?php echo $topic['name']; ?></option>
+                            <?php } ?>
                         </select>
                         <br>
-                        <button type="submit" class="btn btn-primary">Сохранить Запись</button>
+                        <button type="submit" name="add-post" class="btn btn-primary">Добавить Запись</button>
                     </form>
                 </form>
             </div>
