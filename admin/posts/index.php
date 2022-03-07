@@ -1,6 +1,6 @@
 <?php
-    session_start();
     include('../../path.php');
+    include('../../application/controllers/posts.php');
     ?>
 <!doctype html>
 <html lang="en">
@@ -43,17 +43,24 @@
             <div class="row title-table">
                 <h2>Управление Записями</h2>
                 <div class="col-1">ID</div>
-                <div class="col-5">Название</div>
+                <div class="col-3">Название</div>
                 <div class="col-2">Автор</div>
-                <div class="col-4">Управление</div>
+                <div class="col-6">Управление</div>
             </div>
+            <?php foreach ($postsAdmin as $post) { ?>
             <div class="row post">
-                <div class="id col-1">1</div>
-                <div class="title col-5">Сатья</div>
-                <div class="author col-2">Данил</div>
+                <div class="id col-1"><?php echo $post['id'];?></div>
+                <div class="title col-3"><?php echo $post['title'];?></div>
+                <div class="author col-2"><?php echo $post['username'];?></div>
                 <div class="red col-2"><a href="">Edit</a></div>
                 <div class="del col-2"><a href="">Delete</a></div>
+                <?php if($post['status']): ?>
+                    <div class="status col-2"><a href="">Unpublished</a></div>
+                <?php else: ?>
+                    <div class="status col-2"><a href="">Published</a></div>
+                <?php endif; ?>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>

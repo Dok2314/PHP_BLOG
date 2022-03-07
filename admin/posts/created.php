@@ -70,6 +70,11 @@
                             <?php } ?>
                         </select>
                         <br>
+                        <div class="input-group mb-3">
+                            <label for="publish">Publish?</label>
+                            <input type="checkbox" value="1" name="publish" id="publish" style="margin-top: 5px; margin-left: 5px;">
+                        </div>
+                        <br>
                         <button type="submit" name="add-post" class="btn btn-primary">Добавить Запись</button>
                     </form>
                 </form>
