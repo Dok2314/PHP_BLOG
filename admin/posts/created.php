@@ -47,16 +47,16 @@
                 <form action="created.php" method="post" enctype="multipart/form-data">
                         <?php if($errorMessage){ ?>
                             <div class="mb-3 col-12 col-md-4 err">
-                                <p><?=$errorMessage;?></p>
+                                <?php include "../../application/helps/error_info.php"; ?>
                             </div>
                         <?php } ?>
                         <div class="mb-3">
                             <label for="title">Название Статьи</label>
-                            <input type="text" name="title" class="form-control" placeholder="Название" id="title" aria-label="Название Сатьи">
+                            <input type="text" name="title" class="form-control" placeholder="Название" id="title" aria-label="Название Сатьи" value="<?=$title;?>">
                         </div>
                         <div class="mb-3">
                             <label for="editor">Содержимое Записи</label>
-                            <textarea class="form-control" name="content" placeholder="Сатьтя..." id="editor" style="height: 100px"></textarea>
+                            <textarea class="form-control" name="content" placeholder="Сатьтя..." id="editor" style="height: 100px"><?=$content;?></textarea>
                         </div>
                         <div class="input-group mb-3">
                             <input type="file" class="form-control" name="img" id="upload">

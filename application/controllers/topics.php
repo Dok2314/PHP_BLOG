@@ -3,7 +3,7 @@
 include "../../application/database/database.php";
 include "../../path.php";
 
-$errorMessage = '';
+$errorMessage = [];
 $id           = '';
 $name         = '';
 $description  = '';
@@ -16,13 +16,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-create'])){
     $description =    trim($_POST['description']);
 
     if($name === '' || $description === ''){
-        $errorMessage = 'Не все поля заполнены!';
+        array_push($errorMessage,'Не все поля заполнены!');
     }elseif(mb_strlen($name, "UTF-8") < 2){
-        $errorMessage = 'Категория должна содержать не менее 2 символов!';
+        array_push($errorMessage,'Категория должна содержать не менее 2 символов!');
     }else{
         $existence = selectOne('topics', ['name' => $name]);
         if($existence['name'] === $name){
-            $errorMessage = 'Такая категория уже есть!';
+            array_push($errorMessage,'Такая категория уже есть!');
         }else{
             $topic = [
                 'name' => $name,
@@ -54,9 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-edit'])) {
     $description = trim($_POST['description']);
 
     if ($name === '' || $description === '') {
-        $errorMessage = 'Не все поля заполнены!';
+        array_push($errorMessage,'Не все поля заполнены!');
     } elseif (mb_strlen($name, "UTF-8") < 2) {
-        $errorMessage = 'Категория должна содержать не менее 2 символов!';
+        array_push($errorMessage,'Категория должна содержать не менее 2 символов!');
     } else {
         $topic = [
             'name' => $name,

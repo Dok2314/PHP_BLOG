@@ -48,7 +48,7 @@ session_start();
                 <form action="created.php" method="post">
                         <?php if($errorMessage){ ?>
                             <div class="mb-3 col-12 col-md-4 err">
-                                <p><?=$errorMessage;?></p>
+                                <?php include "../../application/helps/error_info.php"; ?>
                             </div>
                         <?php } ?>
                         <div class="mb-3">

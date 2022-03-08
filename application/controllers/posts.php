@@ -7,7 +7,7 @@ if(!$_SESSION){
     header("Location: " . BASE_URL . "login.php");
 }
 
-$errorMessage  = '';
+$errorMessage  = [];
 $id            = '';
 $title         = '';
 $content       = '';
@@ -35,23 +35,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
         if(strpos($fileType, 'image') === false){
             die('Можно загружать только изображение!');
         }elseif($fileSize > 50000){
-            die('Слишком большой файл!');
+            array_push($errorMessage, 'Слишком большой файл!');
         }elseif($width > 1000){
-            die('Слишком большая ширина');
+            array_push($errorMessage, 'Слишком большая ширина');
         }elseif ($height > 1000){
-            die('Слишком большая высота');
+            array_push($errorMessage, 'Слишком большая высота');
         }else{
             $result = move_uploaded_file($fileTmpName, $destination);
 
             if($result){
                 $_POST['img'] = $imgName;
             }else{
-                $errorMessage = 'Ошибка загрузки файла!';
+                array_push($errorMessage, 'Ошибка загрузки файла!');
             }
         }
 
     }else{
-        $errorMessage = 'Ошибка получения картинки!';
+        array_push($errorMessage, 'Ошибка получения картинки!');
     }
 
     $title        =    trim($_POST['title']);
@@ -62,9 +62,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
     $publish = isset($_POST['publish']) ? 1 : 0;
 
     if($title === '' || $content === '' || $topic === ''){
-        $errorMessage = 'Не все поля заполнены!';
+        array_push($errorMessage, 'Не все поля заполнены!');
     }elseif(mb_strlen($title, "UTF-8") < 5){
-        $errorMessage = 'Название поста должно содержать не менее 5 символов!';
+        array_push($errorMessage, 'Название поста должно содержать не менее 5 символов!');
     }else{
             $post = [
                 'user_id'  => $_SESSION['id'],

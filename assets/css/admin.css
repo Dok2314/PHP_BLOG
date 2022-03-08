@@ -275,3 +275,19 @@ form div.err p{
     width: 800px;
     font-size: 1.5rem;
 }
+
+/*
+    ERROR MESSAGE
+*/
+
+.add-post .err{
+    padding: 1rem 0;
+    color: red;
+    text-align: center;
+    width: 800px;
+}
+
+.add-post .err ul li{
+    list-style-type: none;
+}
+
