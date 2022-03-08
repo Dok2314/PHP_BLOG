@@ -37,8 +37,6 @@
         <div class="posts col-9">
             <div class="button row">
                 <a href="<?php echo BASE_URL . "admin/posts/created.php";?>" class="col-2 btn btn-success">Создать</a>
-                <span class="col-1"></span>
-                <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-3 btn btn-warning">Редактировать</a>
             </div>
             <div class="row title-table">
                 <h2>Управление Записями</h2>
@@ -52,12 +50,12 @@
                 <div class="id col-1"><?php echo $post['id'];?></div>
                 <div class="title col-3"><?php echo $post['title'];?></div>
                 <div class="author col-2"><?php echo $post['username'];?></div>
-                <div class="red col-2"><a href="">Edit</a></div>
-                <div class="del col-2"><a href="">Delete</a></div>
+                <div class="red col-2"><a href="edit.php?id=<?=$post['id'];?>">Edit</a></div>
+                <div class="del col-2"><a href="edit.php?delete_id=<?=$post['id'];?>">Delete</a></div>
                 <?php if($post['status']): ?>
-                    <div class="status col-2"><a href="">Unpublished</a></div>
+                    <div class="status col-2"><a href="edit.php?publish=0&pub_id=<?=$post['id'];?>">Unpublish</a></div>
                 <?php else: ?>
-                    <div class="status col-2"><a href="">Published</a></div>
+                    <div class="status col-2"><a href="edit.php?publish=1&pub_id=<?=$post['id'];?>">Publish</a></div>
                 <?php endif; ?>
             </div>
             <?php } ?>
